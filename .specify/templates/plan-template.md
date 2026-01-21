@@ -29,9 +29,15 @@
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-[Gates determined based on constitution file]
+Gates derived from the project constitution (Vulpo Personal Blog):
+
+- Content-First: All proposed features that introduce content formats or storage MUST include sample content and a migration/ingest plan.
+- Lightweight Tooling: New dependencies that affect build/runtime size MUST be justified; avoid UI frameworks and heavy styling libraries.
+- Design System: UI/UX changes MUST map to SCSS variables and follow the BEM naming convention; include style tokens when adding components.
+- Accessibility & Performance: Proposed pages/features MUST document accessibility considerations and an initial performance impact estimate.
+- Governance: Major or structural changes MUST include a constitution amendment plan when they alter core principles.
 
 ## Project Structure
 
@@ -48,6 +54,7 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
+
 <!--
   ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
   for this feature. Delete unused options and expand the chosen structure with
@@ -98,7 +105,7 @@ directories captured above]
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |
