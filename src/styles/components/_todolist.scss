@@ -1,0 +1,123 @@
+@use "../util/" as u;
+
+.todo-list {
+    box-shadow: 0 35px 50px -15px rgba(194, 195, 214, 0.5);
+    overflow: hidden;
+
+    li {
+        &:first-of-type {
+            border-top-left-radius: var(--br-5);
+            border-top-right-radius: var(--br-5);
+        }
+    }
+
+    &__item {
+        background-color: light-dark(var(--c-white), var(--c-purple-900));
+        border-bottom: 1px solid
+            light-dark(var(--c-white-200), var(--c-purple-900));
+        padding-block: var(--spacing-250);
+        padding-inline: var(--spacing-200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &.draggable-mirror {
+            inline-size: 100%;
+            max-inline-size: var(--wrapper-size);
+        }
+
+        > div {
+            display: flex;
+            align-items: center;
+            column-gap: var(--spacing-300);
+        }
+
+        label {
+            cursor: pointer;
+        }
+
+        .line-through {
+            text-decoration: line-through;
+            color: light-dark(var(--c-white-300), var(--c-white-200));
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__delete {
+        margin-inline-start: auto;
+        margin-inline-end: var(--spacing-200);
+    }
+
+    &__clear {
+        cursor: pointer;
+    }
+
+    &__footer {
+        border-bottom-left-radius: var(--br-5);
+        border-bottom-right-radius: var(--br-5);
+        background-color: light-dark(var(--c-white), var(--c-purple-900));
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-300);
+        align-items: center;
+        padding-inline: var(--spacing-300);
+        padding-block: var(--spacing-250);
+        font-size: var(--fs-14);
+    }
+
+    &__reorder {
+        margin-block: var(--spacing-500);
+        font-size: var(--fs-14);
+        text-align: center;
+    }
+
+    &__filters {
+        font-weight: bold;
+        display: flex;
+        column-gap: var(--spacing-250);
+
+        span {
+            cursor: pointer;
+        }
+
+        .active {
+            color: var(--c-blue-700);
+        }
+
+        button,
+        & + div {
+            &:hover {
+                color: light-dark(var(--c-purple-800), var(--c-white));
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    .todo-list {
+        &__delete {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        &__item:hover {
+            .todo-list__delete {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@include u.breakpoint("medium") {
+    .todo-list {
+        &__footer {
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+    }
+}
