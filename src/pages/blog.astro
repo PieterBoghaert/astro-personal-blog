@@ -1,21 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
-import { posts } from '../data/posts';
+const allPosts = await Astro.glob('/src/content/posts/**/*.md');
+const blogPosts = allPosts
+  .sort((a, b) => new Date(b.frontmatter.publishedAt || b.frontmatter.date).valueOf() - new Date(a.frontmatter.publishedAt || a.frontmatter.date).valueOf())
+  .slice(0, 5);
 ---
 <Base title="Vulpo — Blog">
   <Header slot="header" />
-  <section class="blog container">
-    <h1 class="blog__title">Blog</h1>
-    <ul class="blog__list">
-      {posts.map(post => (
-        <li class="blog__item" key={post.id}>
-          <a class="blog__link" href={`/blog/${post.id}.html`}>
-            <h2 class="blog__post-title">{post.title}</h2>
-            {post.excerpt && <p class="blog__excerpt">{post.excerpt}</p>}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <div class="wrapper page-content">
+    <section class="blog">
+      <h1 class="blog__title h2">My Articles</h1>
+      <p>Below are all my recent blog posts. Click on any title to read the full article.</p>
+      <ul class="blog-list">
+        {blogPosts.map(post => (
+          <li class="blog-list__item">
+            <a class="blog-list__link" href={`/blog/${post.frontmatter.slug}.html`}>
+              <h5 class="blog-list__post-title">{post.frontmatter.title}</h5>
+              <span class="blog-list__post-date">{new Date(post.frontmatter.publishedAt || post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              {post.frontmatter.description && <p class="blog-list__excerpt">{post.frontmatter.description}</p>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
 </Base>

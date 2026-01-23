@@ -11,3 +11,15 @@
     gap: var(--spacing-200);
   }
 }
+
+@container style(--theme: dark) {
+  .site-footer {
+    &__social {
+      a {
+        img {
+          filter: invert(1);
+        }
+      }
+    }
+  }
+}

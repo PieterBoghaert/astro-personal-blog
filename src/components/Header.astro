@@ -25,10 +25,15 @@ const { current = '/' } = Astro.props;
         class={['site-header__link', current === '/about' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
         href="/about"
         >About</a>
+      <a
+        class={['site-header__link', current === '/newsletter' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        href="/newsletter"
+        >Newsletter</a>
     </nav>
     <div class="site-header__modus">
         <button id="theme-toggle" class="site-header__modus-button" aria-label="Toggle color mode" aria-pressed="false">
-            <img src="/src/images/icon-moon.svg" alt="Moon icon" width="20" height="20" />
+            <img src="/src/images/icon-moon.svg" alt="Moon icon" width="20" height="20" class="icon-moon" />
+            <img src="/src/images/icon-sun.svg" alt="Sun icon" width="20" height="20" class="icon-sun" />
             <span class="visually-hidden">Toggle color mode</span>
         </button>
     </div>

@@ -11,6 +11,7 @@
     --spacing-300: calc(24 / 16 * 1rem);
     --spacing-400: calc(32 / 16 * 1rem);
     --spacing-500: calc(40 / 16 * 1rem);
+    --spacing-550: calc(44 / 16 * 1rem);
     --spacing-600: calc(48 / 16 * 1rem);
     --spacing-700: calc(60 / 16 * 1rem);
 
@@ -186,6 +187,31 @@
   }
 }
 
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-500);
+  margin-block: var(--spacing-550) var(--spacing-600);
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-100);
+  }
+}
+
+.blog-post__content {
+  margin-block: var(--spacing-400);
+
+  ul,
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-150);
+    margin-block-start: var(--spacing-150);
+  }
+}
+
 @include u.breakpoint("medium") {
   .page-content {
     margin-block-start: var(--spacing-600);
@@ -193,5 +219,15 @@
     section {
       margin-block: var(--spacing-600);
     }
+  }
+
+  .blog-post__content {
+    margin-block: var(--spacing-400);
+  }
+}
+
+@include u.breakpoint("large") {
+  .blog-post__content {
+    margin-block: var(--spacing-600);
   }
 }
