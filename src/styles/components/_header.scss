@@ -1,0 +1,51 @@
+.site-header {
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-250);
+    background-color: var(--c-neutral-0);
+    padding: var(--spacing-75);
+    border-radius: var(--br-10);
+  }
+
+  &__profile {
+    img {
+      border-radius: var(--br-10);
+    }
+  }
+
+  &__nav {
+    margin-inline-start: auto;
+    display: flex;
+    gap: var(--spacing-300);
+  }
+
+  &__link {
+    color: var(--color-text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--br-8);
+  }
+
+  &__link--active {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  &__modus {
+    display: flex;
+
+    &-button {
+      inline-size: 44px;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--br-8);
+      background-color: light-dark(var(--c-neutral-100), var(--c-neutral-900));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

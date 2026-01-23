@@ -1,11 +1,35 @@
 ---
 import Base from '../layouts/Base.astro';
-import Header from '../components/Header.astro';
+import SocialShare from 'src/components/SocialShare.astro';
+
+const allPosts = await Astro.glob('/src/content/posts/**/*.md');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.frontmatter.publishedAt || b.frontmatter.date).valueOf() - new Date(a.frontmatter.publishedAt || a.frontmatter.date).valueOf())
+  .slice(0, 5);
 ---
-<Base title="Vulpo — Home">
-  <Header slot="header" />
-  <section class="home container">
-    <h1 class="home__title">Welcome to Vulpo</h1>
-    <p class="home__lead">A simple personal blog built with Astro.</p>
-  </section>
+<Base title="Personal Blog — Home">
+  
+  <div class="wrapper page-content">
+    <section class="home-intro">
+        <h1 class="h2">Hi, I’m Paulina 👋</h1>
+        <p>I’m on a journey to become a front-end web developer. I love building little projects, trying out new coding techniques, and sharing what I learn along the way. When I’m not at my desk, you’ll find me reading, hiking through the mountains, or challenging myself on rock-climbing walls.</p>
+        <p>I started this blog to document my progress, keep myself accountable, and hopefully inspire anyone else who’s learning to code. Welcome to my corner of the internet, and thanks for stopping by!</p>
+        <SocialShare />
+    </section>
+    <section class="home-articles">
+        <h2>Latest Articles</h2>
+        <ul class="home-articles__list">
+          {latestPosts.map(post => (
+            <li class="home-articles__item" key={post.url}>
+              <a class="home-articles__link" href={post.url}>
+                <h5 class="home-articles__post-title">{post.frontmatter.title}</h5>
+                <span class="home-articles__post-date">{new Date(post.frontmatter.publishedAt || post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div>View all articles</div>
+    </section>
+  </div>
+ 
 </Base>

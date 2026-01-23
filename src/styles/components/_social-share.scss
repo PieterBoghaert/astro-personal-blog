@@ -1,0 +1,19 @@
+.social-share {
+  display: flex;
+  gap: var(--spacing-150);
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--br-10);
+    background-color: light-dark(var(--c-neutral-0), var(--c-neutral-800));
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+}

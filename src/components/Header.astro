@@ -1,12 +1,83 @@
 ---
+const { current = '/' } = Astro.props;
 ---
-<header class="site__header header" role="banner">
-  <div class="container header__inner">
-    <a class="header__brand" href="/">Vulpo</a>
-    <nav class="header__nav" aria-label="Main navigation">
-      <a class="header__link" href="/">Home</a>
-      <a class="header__link" href="/blog">Blog</a>
-      <a class="header__link" href="/about">About</a>
+<header class="site-header wrapper" role="banner">
+  <div class="container site-header__inner">
+    <a class="site-header__profile" href="/">
+        <img
+        class="site-header__avatar"
+        src="/src/images/image-avatar.jpg"
+        alt="Profile avatar"
+        width="40"
+        height="40"
+        />
+    </a>
+    <nav class="site-header__nav" aria-label="Main navigation">
+      <a
+        class={['site-header__link', current === '/' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        href="/"
+        >Home</a>
+      <a
+        class={['site-header__link', current.startsWith('/blog') ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        href="/blog"
+        >Blog</a>
+      <a
+        class={['site-header__link', current === '/about' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        href="/about"
+        >About</a>
     </nav>
+    <div class="site-header__modus">
+        <button id="theme-toggle" class="site-header__modus-button" aria-label="Toggle color mode" aria-pressed="false">
+            <img src="/src/images/icon-moon.svg" alt="Moon icon" width="20" height="20" />
+            <span class="visually-hidden">Toggle color mode</span>
+        </button>
+    </div>
   </div>
 </header>
+
+<script>
+;(function(){
+  const root = document.documentElement;
+  const STORAGE_KEY = 'theme';
+  const btn = document.getElementById('theme-toggle');
+
+  function applyTheme(theme){
+    if(!theme) return;
+    try { root.style.setProperty('--theme', theme); } catch(e){}
+    try { root.setAttribute('data-theme', theme); } catch(e){}
+    if(btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+    // Persisting user preference is commented out for now.
+    // try { localStorage.setItem(STORAGE_KEY, theme); } catch(e){}
+  }
+
+  function readStored(){
+    // LocalStorage access is commented out for now. Re-enable if you want to persist.
+    // try { return localStorage.getItem(STORAGE_KEY); } catch(e){ return null; }
+    return null;
+  }
+
+  // const stored = readStored(); // reading from localStorage is disabled
+  const stored = null;
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // If a user preference is stored, apply it so it overrides prefers-color-scheme.
+  // If there is no stored preference, do NOT set `--theme` or `data-theme` on <html>
+  // so that native `prefers-color-scheme` CSS can control the initial appearance.
+  if (stored) {
+    applyTheme(stored);
+  } else {
+    if (btn) btn.setAttribute('aria-pressed', 'false');
+  }
+
+  if(btn){
+    btn.addEventListener('click', function(){
+      // Determine current theme: prefer explicit root attributes, otherwise fall back to system preference
+      const explicit = (root.getAttribute('data-theme') || root.style.getPropertyValue('--theme') || '').trim();
+      const current = explicit || (prefersDark ? 'dark' : 'light');
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+    });
+  }
+})();
+</script>
+
