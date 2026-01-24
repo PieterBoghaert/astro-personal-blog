@@ -1,15 +1,18 @@
 ---
+import { Image } from 'astro:assets';
+import avatarImg from '../images/image-avatar.jpg';
+
 const { current = '/' } = Astro.props;
 ---
 <header class="site-header wrapper" role="banner">
   <div class="container site-header__inner">
     <a class="site-header__profile" href="/">
-        <img
+        <Image
         class="site-header__avatar"
-        src="/src/images/image-avatar.jpg"
+        src={avatarImg}
         alt="Profile avatar"
-        width="40"
-        height="40"
+        width={40}
+        height={40}
         />
     </a>
     <nav class="site-header__nav" aria-label="Main navigation">
@@ -32,8 +35,8 @@ const { current = '/' } = Astro.props;
     </nav>
     <div class="site-header__modus">
         <button id="theme-toggle" class="site-header__modus-button" aria-label="Toggle color mode" aria-pressed="false">
-            <img src="/src/images/icon-moon.svg" alt="Moon icon" width="20" height="20" class="icon-moon" />
-            <img src="/src/images/icon-sun.svg" alt="Sun icon" width="20" height="20" class="icon-sun" />
+            <img src="/images/icon-moon.svg" alt="Moon icon" width="20" height="20" class="icon-moon" />
+            <img src="/images/icon-sun.svg" alt="Sun icon" width="20" height="20" class="icon-sun" />
             <span class="visually-hidden">Toggle color mode</span>
         </button>
     </div>
