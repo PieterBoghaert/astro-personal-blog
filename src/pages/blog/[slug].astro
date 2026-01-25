@@ -19,18 +19,20 @@ const postDate = new Date(publishedAt || date);
 
 <Base title={`${title} — Vulpo`}>
   <Header slot="header" />
-  <div class="wrapper page-content">
-    <article class="blog-post">
-      <header class="blog-post__header">
-        <h1 class="blog-post__title h2">{title}</h1>
-        <time class="blog-post__date" datetime={postDate.toISOString()}>
-          {postDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
-        {description && <p class="blog-post__description">{description}</p>}
-      </header>
-      <div class="blog-post__content">
-        <Content />
-      </div>
-    </article>
+  <div class="wrapper">
+    <div class="page-content">
+      <article class="blog-post">
+        <header class="blog-post__header">
+          <h1 class="blog-post__title h2">{title}</h1>
+          <time class="blog-post__date" datetime={postDate.toISOString()}>
+            {postDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          {description && <p class="blog-post__description">{description}</p>}
+        </header>
+        <div class="blog-post__content">
+          <Content />
+        </div>
+      </article>
+    </div>
   </div>
 </Base>

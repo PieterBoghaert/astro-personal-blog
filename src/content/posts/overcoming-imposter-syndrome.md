@@ -13,7 +13,8 @@ Today, I want to open up about a topic that hits close to home for many of us in
 
 Imposter syndrome is that nagging feeling that you're somehow _faking it_ and that everyone else knows more than you. In a fast-moving field like software development, it's easy to compare yourself to others and think you come up short.
 
-> “I have written eleven books, but each time I think, 'Uh oh, they're going to find out now.”  
+> "I have written eleven books, but each time I think, 'Uh oh, they're going to find out now."
+>
 > — Maya Angelou
 
 If even Maya Angelou felt like an imposter, it's safe to say we're in good company!

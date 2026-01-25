@@ -1,14 +1,19 @@
 .site-footer {
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   &__social {
     display: flex;
     align-items: center;
     gap: var(--spacing-200);
+  }
+
+  &__inner {
+    padding-inline: var(--spacing-125);
+    margin-inline: var(--spacing-125);
+    padding-block-start: var(--spacing-200);
+    border-block-start: 1px solid var(--c-neutral-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-inline: 1px solid var(--c-neutral-200);
   }
 }
 

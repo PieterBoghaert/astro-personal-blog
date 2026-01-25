@@ -1,0 +1,37 @@
+@use "../util/" as u;
+
+.blog-post__content {
+  padding-block: var(--spacing-400);
+
+  ul,
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-150);
+    margin-block-start: var(--spacing-150);
+  }
+
+  blockquote {
+    padding: var(--spacing-75) var(--spacing-150);
+    margin: var(--spacing-150) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-125);
+    border-inline-start: 4px solid var(--c-neutral-300);
+  }
+
+  hr {
+    border: 1px solid var(--c-neutral-200);
+    color: var(--c-neutral-200);
+  }
+
+  .astro-code {
+    padding: var(--spacing-150);
+    background-color: var(--c-neutral-200) !important; //override inline styles
+
+    code {
+      display: block;
+      inline-size: 100%;
+    }
+  }
+}
