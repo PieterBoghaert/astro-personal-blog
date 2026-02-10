@@ -39,9 +39,13 @@
   h4,
   h5 {
     margin: 0;
-    text-wrap: balance;
     line-height: normal;
     color: var(--color-heading, var(--color-text));
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
   }
 
   h1,

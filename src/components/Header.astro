@@ -48,25 +48,67 @@ const { current = '/' } = Astro.props;
   const root = document.documentElement;
   const STORAGE_KEY = 'theme';
   const btn = document.getElementById('theme-toggle');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // Check if @container style() is supported
+  let containerStyleQueriesSupported = null;
+  function supportsContainerStyleQueries() {
+    if (containerStyleQueriesSupported !== null) return containerStyleQueriesSupported;
+    
+    const container = document.createElement('div');
+    container.style.containerType = 'inline-size';
+    container.style.color = 'green'; // used in the style query
+
+    const child = document.createElement('div');
+    child.className = 'test-style-query';
+    container.appendChild(child);
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @container style(color: green) {
+        .test-style-query {
+          --style-query-result: success;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(container);
+
+    const result = getComputedStyle(child).getPropertyValue('--style-query-result');
+
+    // Clean up
+    container.remove();
+    style.remove();
+
+    containerStyleQueriesSupported = result.trim() === 'success';
+    return containerStyleQueriesSupported;
+  }
 
   function applyTheme(theme){
     if(!theme) return;
+    console.log('Updating theme to:', theme);
+    
+    // Always set CSS variable for container style queries
     try { root.style.setProperty('--theme', theme); } catch(e){}
     try { root.setAttribute('data-theme', theme); } catch(e){}
     if(btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-    // Persisting user preference is commented out for now.
-    // try { localStorage.setItem(STORAGE_KEY, theme); } catch(e){}
+    
+    // If container style queries are NOT supported, also add body classes as fallback
+    if (!supportsContainerStyleQueries()) {
+      console.log('Container style queries not supported, using fallback method.');
+      document.body.classList.remove('theme-light', 'theme-dark');
+      document.body.classList.add(`theme-${theme}`);
+    }
+    
+    // Persist user preference
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch(e){}
   }
 
   function readStored(){
-    // LocalStorage access is commented out for now. Re-enable if you want to persist.
-    // try { return localStorage.getItem(STORAGE_KEY); } catch(e){ return null; }
-    return null;
+    try { return localStorage.getItem(STORAGE_KEY); } catch(e){ return null; }
   }
 
-  // const stored = readStored(); // reading from localStorage is disabled
-  const stored = null;
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const stored = readStored();
 
   // If a user preference is stored, apply it so it overrides prefers-color-scheme.
   // If there is no stored preference, do NOT set `--theme` or `data-theme` on <html>
@@ -83,7 +125,16 @@ const { current = '/' } = Astro.props;
       const explicit = (root.getAttribute('data-theme') || root.style.getPropertyValue('--theme') || '').trim();
       const current = explicit || (prefersDark ? 'dark' : 'light');
       const next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
+      
+      // Use view transitions if supported
+      if (!document.startViewTransition) {
+        applyTheme(next);
+        return;
+      }
+
+      document.startViewTransition(() => {
+        applyTheme(next);
+      });
     });
   }
 })();

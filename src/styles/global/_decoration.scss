@@ -1,2 +1,31 @@
 @layer decoration {
+  .line-under-big {
+    text-decoration: underline;
+    text-decoration-thickness: var(--spacing-125);
+    text-decoration-color: var(--c-blue-500);
+    text-underline-offset: -2px;
+    text-decoration-skip-ink: none;
+  }
+
+  .line-under-small {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--c-blue-500);
+    text-underline-offset: 4px;
+  }
+
+  .line-end {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset-block-end: 0;
+      inset-inline-end: -50px;
+      inline-size: var(--spacing-500);
+      block-size: 3px;
+      background-color: var(--c-blue-500);
+    }
+  }
 }

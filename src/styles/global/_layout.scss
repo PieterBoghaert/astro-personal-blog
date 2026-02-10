@@ -33,6 +33,10 @@
       --theme: dark;
       color-scheme: dark;
     }
+
+    @view-transition {
+      navigation: auto;
+    }
   }
 
   /* Ensure footer sticks to bottom */
@@ -199,6 +203,10 @@
   }
 }
 
+.blog__title {
+  margin-block-end: var(--spacing-75);
+}
+
 .blog-list {
   display: flex;
   flex-direction: column;
@@ -243,6 +251,16 @@
 
     picture img {
       border-radius: var(--br-10);
+    }
+
+    ul {
+      padding-inline-start: var(--spacing-300);
+      line-height: 1.7;
+
+      li {
+        position: relative;
+        list-style: disc;
+      }
     }
   }
 
