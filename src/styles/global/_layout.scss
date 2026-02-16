@@ -37,6 +37,7 @@
     @view-transition {
       navigation: auto;
     }
+    interpolate-size: allow-keywords;
   }
 
   /* Ensure footer sticks to bottom */
@@ -70,7 +71,6 @@
 
     @container style(--theme: dark) {
       color-scheme: dark;
-      background-image: url("/public/img/bg-mobile-dark.jpg");
 
       .main-header {
         .icon-moon {

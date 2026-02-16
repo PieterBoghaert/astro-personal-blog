@@ -33,6 +33,12 @@ const { current = '/' } = Astro.props;
         href="/newsletter"
         >Newsletter</a>
     </nav>
+    <div class="site-header__hamburger">
+      <button id="hamburger-toggle" class="site-header__hamburger-button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <img src="/images/icon-menu.svg" alt="Hamburger menu icon" width="20" height="20" class="icon-hamburger" />
+        <img src="/images/icon-menu-close.svg" alt="Close menu icon" width="20" height="20" class="icon-close" />
+      </button>
+    </div>
     <div class="site-header__modus">
         <button id="theme-toggle" class="site-header__modus-button" aria-label="Toggle color mode" aria-pressed="false">
             <img src="/images/icon-moon.svg" alt="Moon icon" width="20" height="20" class="icon-moon" />
@@ -137,6 +143,15 @@ const { current = '/' } = Astro.props;
       });
     });
   }
+
+  // Hamburger menu toggle
+  const hamburgerBtn = document.getElementById('hamburger-toggle');
+  const nav = document.querySelector('.site-header__nav');
+  if (hamburgerBtn && nav) {
+    hamburgerBtn.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+  } 
 })();
 </script>
 
