@@ -16,7 +16,7 @@ const blogPosts = allPosts
         <ul class="blog-list">
           {blogPosts.map(post => (
             <li class="blog-list__item animate-on-scroll">
-              <a class="blog-list__link" href={`/blog/${post.frontmatter.slug}.html`}>
+              <a class="blog-list__link" href={`/blog/${post.frontmatter.slug}/`}>
                 <h5 class="blog-list__post-title">{post.frontmatter.title}</h5>
                 <span class="blog-list__post-date">{new Date(post.frontmatter.publishedAt || post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 {post.frontmatter.description && <p class="blog-list__excerpt">{post.frontmatter.description}</p>}
