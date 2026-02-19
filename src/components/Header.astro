@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import avatarImg from '../images/image-avatar.jpg';
 
 const { current = '/' } = Astro.props;
+const normalizedCurrent = current !== '/' ? current.replace(/\/+$/, '') : '/';
 ---
 <header class="site-header wrapper" role="banner">
   <div class="container site-header__inner">
@@ -17,19 +18,19 @@ const { current = '/' } = Astro.props;
     </a>
     <nav class="site-header__nav" aria-label="Main navigation">
       <a
-        class={['site-header__link', current === '/' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        class={['site-header__link', normalizedCurrent === '/' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
         href="/"
         >Home</a>
       <a
-        class={['site-header__link', current.startsWith('/blog') ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        class={['site-header__link', normalizedCurrent.startsWith('/blog') ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
         href="/blog"
         >Blog</a>
       <a
-        class={['site-header__link', current === '/about' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        class={['site-header__link', normalizedCurrent === '/about' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
         href="/about"
         >About</a>
       <a
-        class={['site-header__link', current === '/newsletter' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
+        class={['site-header__link', normalizedCurrent === '/newsletter' ? 'site-header__link--active' : ''].filter(Boolean).join(' ')}
         href="/newsletter"
         >Newsletter</a>
     </nav>
