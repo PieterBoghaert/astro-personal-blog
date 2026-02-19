@@ -2,11 +2,17 @@
   &__inner {
     display: flex;
     align-items: center;
-    gap: var(--spacing-250);
+    gap: var(--spacing-75);
     background-color: light-dark(var(--c-neutral-0), var(--c-neutral-800));
     padding: var(--spacing-75);
     border-radius: var(--br-10);
+    border: 1px solid light-dark(var(--c-neutral-200), var(--c-neutral-700));
     position: relative;
+    box-shadow: 0 6px 10px 0 rgba(123, 123, 123, 0.03);
+
+    @media (width > 768px) {
+      gap: var(--spacing-250);
+    }
   }
 
   &__profile {
@@ -16,18 +22,27 @@
   }
 
   &__nav {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    overflow: clip;
     position: absolute;
     inset-block-start: calc(100% + var(--spacing-150));
     inset-inline-start: 0;
     inline-size: 100%;
     background-color: light-dark(var(--c-neutral-0), var(--c-neutral-800));
     padding: var(--spacing-150);
+    opacity: 0;
     border-radius: var(--br-10);
     z-index: 10;
+    transition:
+      height 0.3s ease,
+      opacity 0.1s ease,
+      background-color 0.1s ease;
+    transition-behavior: allow-discrete;
 
     @media (width > 768px) {
-      display: flex;
+      flex-direction: row;
       gap: var(--spacing-300);
       background-color: transparent;
       position: static;
@@ -36,11 +51,15 @@
       margin-inline-start: auto;
       inline-size: auto;
       padding: 0;
+      opacity: 1;
+      height: auto;
+      overflow: visible;
     }
 
     &.open {
-      display: flex;
-      flex-direction: column;
+      height: auto;
+      overflow: visible;
+      opacity: 1;
       gap: var(--spacing-150);
       row-rule-width: 1px;
       row-rule-style: solid;
@@ -89,8 +108,6 @@
       background-color: transparent;
       border-radius: var(--br-10);
       padding: var(--spacing-125);
-      .icon-hamburger {
-      }
 
       .icon-close {
         // filter: invert(1);
@@ -99,7 +116,7 @@
 
       @container style(--theme: dark) {
         .icon-hamburger {
-          filter: invert(0);
+          filter: invert(1);
         }
 
         .icon-close {

@@ -72,6 +72,7 @@ button[type="submit"] {
   padding: var(--spacing-150) var(--spacing-300);
   color: var(--c-neutral-900);
   margin-block-start: calc(var(--spacing-200) * -1);
+  transition: background-color 0.3s ease;
 
   :disabled {
     opacity: 0.6;

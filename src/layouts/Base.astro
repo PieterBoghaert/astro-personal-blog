@@ -2,7 +2,7 @@
 import '../styles/main.scss';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-const { title = 'Vulpo Blog' } = Astro.props;
+const { title = 'Personal Blog' } = Astro.props;
 const current = new URL(Astro.request.url).pathname;
 ---
 <!doctype html>
@@ -23,5 +23,15 @@ const current = new URL(Astro.request.url).pathname;
       </div>
     </main>
     <Footer />
+    <script>
+      import { initScrollAnimations } from '../scripts/scrollAnimations';
+      
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollAnimations);
+      } else {
+        initScrollAnimations();
+      }
+    </script>
   </body>
 </html>

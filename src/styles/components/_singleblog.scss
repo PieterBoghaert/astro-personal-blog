@@ -1,7 +1,27 @@
 @use "../util/" as u;
 
+.blog-post__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-150);
+  padding-block-end: var(--spacing-400);
+  border-bottom: 1px solid
+    light-dark(var(--c-neutral-200), var(--c-neutral-700));
+}
+
 .blog-post__content {
   padding-block: var(--spacing-400);
+
+  h2,
+  h3 {
+    margin-block-end: var(--spacing-150);
+    font-size: var(--fs-28);
+    font-weight: var(--fw-bold);
+  }
+
+  p + p {
+    margin-block-start: var(--spacing-150);
+  }
 
   ul,
   ol {
@@ -23,6 +43,7 @@
   hr {
     border: 1px solid var(--c-neutral-200);
     color: var(--c-neutral-200);
+    margin-block: var(--spacing-300);
   }
 
   .astro-code {
