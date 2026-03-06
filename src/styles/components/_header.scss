@@ -41,6 +41,26 @@
       background-color 0.1s ease;
     transition-behavior: allow-discrete;
 
+    @supports (anchor-name: --a) {
+      &::before {
+        content: "";
+        position: absolute;
+        position-anchor: --nav-pill;
+        //inset: anchor(top) anchor(right) anchor(bottom) anchor(left);
+        background-color: var(--c-blue-500);
+        block-size: 3px;
+        inset: auto calc(anchor(right) + var(--spacing-150))
+          calc(anchor(bottom) + var(--spacing-150) - 2px)
+          calc(anchor(left) + var(--spacing-150));
+        transition-duration: 0.3s;
+      }
+
+      &:has(.site-header__link:hover)
+        .site-header__link.site-header__link--active:not(:hover) {
+        anchor-name: none;
+      }
+    }
+
     @media (width > 768px) {
       flex-direction: row;
       gap: var(--spacing-300);
@@ -110,7 +130,6 @@
       padding: var(--spacing-125);
 
       .icon-close {
-        // filter: invert(1);
         display: none;
       }
 
@@ -129,13 +148,13 @@
   &__link {
     color: light-dark(var(--c-neutral-600), var(--c-neutral-400));
     text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      text-decoration-color: var(--c-blue-500);
-      text-decoration-thickness: 3px;
-      text-underline-offset: 2px;
-      font-weight: var(--fw-normal);
+    z-index: 1;
+    position: relative;
+    &:not(:has(.site-header__link:hover)).site-header__link--active {
+      anchor-name: --nav-pill;
+    }
+    &:is(:hover, :focus-visible) {
+      anchor-name: --nav-pill;
     }
 
     @media (width > 768px) {
